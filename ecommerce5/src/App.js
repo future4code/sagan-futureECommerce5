@@ -2,6 +2,14 @@ import React from 'react';
 import './App.css';
 import Home from './components/Home';
 import Filtro from './components/Filtros';
+import styled from 'styled-components'
+
+const MainDiv = styled.div`
+display: grid;
+grid-template-columns: 1fr 3fr;
+padding: 10px;
+gap: 20px;
+`
 
 class App extends React.Component {
   constructor(props) {
@@ -73,10 +81,10 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
+      <MainDiv>
         <Filtro dados = { this.state.cards } modificarDadosFiltrados = {this.modificarDadosFiltrados}  />
         <Home dados={ this.state.cardsFiltrados.length > 0 ? this.state.cardsFiltrados : this.state.cards} />
-      </div>
+      </MainDiv>
     )
   }
 }

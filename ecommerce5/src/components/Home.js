@@ -1,13 +1,24 @@
 import React from 'react'
 import Cards from './Cards'
+import styled from 'styled-components'
 
-function Home(props){
+const ImagesGridPlaceholder = styled.div`
+display: grid;
+grid-template-columns:repeat(4, 1fr);
+gap: 10px;
+margin-top: 35px;
+margin-left: 5px;
+`
+
+//remover margin top depois
+
+function Home(props) {
     return (
-        <div>
+        <ImagesGridPlaceholder>
             { props.dados.map((dado) => {
-                return <Cards imagem={dado.imageUrl} titulo={dado.name}/>
+                return <Cards imagem={dado.imageUrl} titulo={dado.name} value={dado.value}/>
             }) }
-        </div>
+        </ImagesGridPlaceholder>
 )
     
 }

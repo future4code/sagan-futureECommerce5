@@ -1,4 +1,10 @@
 import React from 'react';
+import styled from 'styled-components'
+
+const FiltrosPlaceholder = styled.div`
+    border: solid 1px black;
+    height: 125vh;
+`
 
 class Filtro extends React.Component {
     constructor(props) {
@@ -56,14 +62,15 @@ class Filtro extends React.Component {
 
     render() {
         return (
-            <div id="filtro">
-                <label for="valorMinimo"> Valor Mínimo:</label>
-                <input id="valorMinimo" onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number"/>
-                <label for="valorMaximo"> Valor Máximo</label>
-                <input id="valorMaximo" onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} id="valorMaximo" type="number"/>
-                <label for="nomeProduto"> Buscar Produto </label>
-                <input id="nomeProduto" onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} id="buscarProduto" type="text"/>
-            </div>
+            <FiltrosPlaceholder>
+                <h3>Filtros</h3>
+                <span>Valor Minimo:</span>
+                <input onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number"/> <br/>
+                <span>Valor Maximo:</span>
+                <input onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} type="number"/> <br/>
+                <span>Buscar Produto:</span>
+                <input  onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} type="text"/> <br/>
+            </FiltrosPlaceholder>
         )
     }
 }
