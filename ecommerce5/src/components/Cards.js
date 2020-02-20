@@ -28,7 +28,7 @@ return (
     <Card>
         <ImagemCard src={props.imagem} alt =" Imagem do card" />
         <StyledSpan>{props.titulo}</StyledSpan>
-        <StyledSpan>R$: 40.50</StyledSpan>
+        <StyledSpan>R${props.value}</StyledSpan>
         <BotaoCard/>
     </Card>
 )
