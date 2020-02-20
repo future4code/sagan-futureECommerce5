@@ -4,7 +4,7 @@ import Cards from './Cards'
 function Home(props){
     return (
         <div>
-        <Cards imagem={require('../img/nasa1.jpg')} titulo="teste"/>
+        <Cards imagem={props.imagem} titulo={''}/>
         <Cards imagem={require('../img/nasa2.jpg')} titulo="teste"/>
         <Cards imagem={require('../img/nasa3.jpg')} titulo="teste"/>
         <Cards imagem={require('../img/nasa4.jpg')} titulo="teste"/>
