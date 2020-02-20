@@ -1,6 +1,19 @@
 import React from 'react';
 import './App.css';
 import Home from './components/Home';
+import styled from 'styled-components'
+
+const MainDiv = styled.div`
+display: grid;
+grid-template-columns: 1fr 3fr;
+padding: 10px;
+gap: 20px;
+`
+
+const FiltrosPlaceholder = styled.div`
+border: solid 1px black;
+height: 125vh;
+`
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +23,7 @@ class App extends React.Component {
         id: 1,
         name: "Foguete da Missão Apollo 11",
         value: 10000.0,
-        imageUrl: "https://picsum.photos/200/200"
+        imageUrl: "https://picsum.photos/200/200",
       },
       {
         id: 2,
@@ -71,14 +84,17 @@ class App extends React.Component {
   
   render() {
     return (
-      <div>
-        <Home imagem = {this.state.cards.map(el =>{
-          return el.imageUrl
-        })} />
+      <MainDiv>
+        <FiltrosPlaceholder>
+          <h3>Filtros</h3>
+          <span>Valor Minimo:</span> <input type="text"></input><br/>
+          <span>Valor Maximo:</span> <input type="text"></input><br/>
+          <span>Buscar Produto:</span> <input type="text"></input><br/>
+        </FiltrosPlaceholder>
         
-          
-        })} 
-      </div>
+        <Home/>
+
+      </MainDiv>
     )
   }
 }
