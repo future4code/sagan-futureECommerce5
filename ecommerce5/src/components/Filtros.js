@@ -6,6 +6,17 @@ const FiltrosPlaceholder = styled.div`
     height: 125vh;
 `
 
+const CartButton = styled.button`
+border-radius: 50%;
+border: none;
+background-color: red;
+position: fixed;
+bottom: 7vh;
+left: 7vh;
+width: 5vw;
+height: 10vh;
+`
+
 class Filtro extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +24,8 @@ class Filtro extends React.Component {
             valorMinimo: '',
             valorMaximo: '',
             nomeProduto: '',
-            dadosFiltrados: []
+            dadosFiltrados: [],
+            cartopen: false
         }
     }
 
@@ -143,6 +155,15 @@ class Filtro extends React.Component {
         this.props.ordenarCards(valorFiltrar)
     }
 
+    openCart = () => {
+        const novoCartOpen = !this.state.cartopen;
+
+        this.setState({
+            cartopen: novoCartOpen
+        })
+        this.props.setarNovoCartOpen(novoCartOpen)
+    }
+
 
     render() {
         return (
@@ -159,6 +180,7 @@ class Filtro extends React.Component {
                     <option value="0">Crescente</option>
                     <option value="1">Decrescente</option>
                 </select>
+                <CartButton onClick={this.openCart}>a</CartButton>
             </FiltrosPlaceholder>
         )
     }
