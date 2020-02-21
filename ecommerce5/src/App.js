@@ -6,10 +6,10 @@ import styled from 'styled-components'
 import ShoppingCart from './components/ShoppingCart';
 
 const MainDiv = styled.div`
-display: grid;
-grid-template-columns: ${props => props.cartopen ? "1fr 2fr 1fr" : "1fr 3fr"};
-padding: 10px;
-gap: 20px;
+  display: grid;
+  grid-template-columns: ${props => props.cartopen ? "1fr 2fr 1fr" : "1fr 3fr"};
+  padding: 10px;
+  gap: 20px;
 `
 
 class App extends React.Component {
@@ -70,7 +70,9 @@ class App extends React.Component {
         imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa9.jpg"
       }],
       cardsFiltrados: [],
-      comiAmendoim: false
+      AdicionarCartOpen: false,
+      carrinho: [],
+      valorTotal: 0
     }
    
   }
@@ -95,12 +97,41 @@ class App extends React.Component {
 
   setarNovoCartOpen = (novoCartOpen) => {
     this.setState({
-      comiAmendoim: novoCartOpen
+      AdicionarCartOpen: novoCartOpen
     })
   }
 
-  addProduto = (Pepperoni) => {
-    console.log(Pepperoni)
+  addProduto = (idProduto) => {
+    const carrinhoCopia = [...this.state.carrinho];
+
+    const indiceDoItemSelecionado = this.state.cards.findIndex((produto) => {
+      return produto.id === idProduto;
+    });
+
+    const itemSelecionado = this.state.cards[indiceDoItemSelecionado]
+
+    carrinhoCopia.push(itemSelecionado)
+
+    
+    this.setState({
+      carrinho: carrinhoCopia
+    })
+
+    this.somarValorTotal(carrinhoCopia)
+  }
+
+  somarValorTotal = (carrinho) => {
+    let valorTotal = this.state.valorTotal > 0 ? this.state.valorTotal : 0
+
+    carrinho.map((produto) => {
+      valorTotal += Number(produto.value)
+    })
+
+    console.log(valorTotal)
+
+    this.setState({
+      valorTotal: valorTotal
+    })
   }
   
   render() {
@@ -108,7 +139,7 @@ class App extends React.Component {
       <MainDiv cartopen = {this.state.comiAmendoim}>
         <Filtro dados = { this.state.cards } modificarDadosFiltrados = {this.modificarDadosFiltrados} ordenarCards = {this.ordenarCards} setarNovoCartOpen={this.setarNovoCartOpen} />
         <Home dados={ this.state.cardsFiltrados } ordemPreco ={this.state.ordemPreco} addProduto={this.addProduto}/>
-        <ShoppingCart cartopen = {this.state.comiAmendoim}/>
+        <ShoppingCart cartopen = {this.state.comiAmendoim} carrinho={this.state.carrinho} valorTotal={this.state.valorTotal} />
       </MainDiv>
     )
   }

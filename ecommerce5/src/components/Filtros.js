@@ -7,14 +7,14 @@ const FiltrosPlaceholder = styled.div`
 `
 
 const CartButton = styled.button`
-border-radius: 50%;
-border: none;
-background-color: red;
-position: fixed;
-bottom: 7vh;
-left: 7vh;
-width: 5vw;
-height: 10vh;
+    border-radius: 50%;
+    border: none;
+    background-color: red;
+    position: fixed;
+    bottom: 7vh;
+    left: 7vh;
+    width: 5vw;
+    height: 10vh;
 `
 
 class Filtro extends React.Component {
