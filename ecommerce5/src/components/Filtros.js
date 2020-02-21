@@ -23,16 +23,16 @@ class Filtro extends React.Component {
         })
 
         if (event.target.value !== '') {
-            const dados = (this.state.valorMaximo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados  
-            
+            const dados = (this.state.valorMaximo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados
+
             const dadosFiltrados = this.aplicarFiltroPorValorMinimo(dados, event.target.value)
 
             console.log(dados, event.target.value)
 
             this.props.modificarDadosFiltrados(dadosFiltrados)
-    
+
             this.setState({
-                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados
             })
         } else {
             let dados = this.props.dados
@@ -62,11 +62,11 @@ class Filtro extends React.Component {
             const dados = (this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados
 
             const dadosFiltrados = this.aplicarFiltroPorValorMaximo(dados, event.target.value)
-    
+
             this.props.modificarDadosFiltrados(dadosFiltrados)
-    
+
             this.setState({
-                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados
             })
         } else {
             let dados = this.props.dados
@@ -94,13 +94,13 @@ class Filtro extends React.Component {
 
         if (event.target.value !== '') {
             const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '') ? this.state.dadosFiltrados : this.props.dados
-            
+
             const dadosFiltrados = this.aplicarFiltroPorNome(dados, event.target.value)
-    
+
             this.props.modificarDadosFiltrados(dadosFiltrados)
-    
+
             this.setState({
-                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados
             })
         } else {
             let dados = this.props.dados
@@ -138,6 +138,10 @@ class Filtro extends React.Component {
             return dado.name.toLowerCase().includes(filtro.toLowerCase())
         })
     }
+    salvarFiltroPreco = (event) =>{
+        const valorFiltrar = event.target.value
+        this.props.ordenarCards(valorFiltrar)
+    }
 
 
     render() {
@@ -145,11 +149,16 @@ class Filtro extends React.Component {
             <FiltrosPlaceholder>
                 <h3>Filtros</h3>
                 <span>Valor Minimo:</span>
-                <input onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number"/> <br/>
+                <input onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number" /> <br />
                 <span>Valor Maximo:</span>
-                <input onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} type="number"/> <br/>
+                <input onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} type="number" /> <br />
                 <span>Buscar Produto:</span>
-                <input  onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} type="text"/> <br/>
+                <input onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} type="text" /> <br />
+                <span>Preço</span>
+                <select onChange={this.salvarFiltroPreco}>
+                    <option value="0">Crescente</option>
+                    <option value="1">Decrescente</option>
+                </select>
             </FiltrosPlaceholder>
         )
     }
