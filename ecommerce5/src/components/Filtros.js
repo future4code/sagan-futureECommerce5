@@ -18,7 +18,7 @@ class Filtro extends React.Component {
     }
 
     handleOnChangeFiltroValorMinimo = (event) => {
-        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados  
+        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.props.dados  : this.state.dadosFiltrados
         const dadosFiltrados = dados.filter((dado) => {
             return dado.value >= event.target.value
         })
