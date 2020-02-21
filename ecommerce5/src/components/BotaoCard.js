@@ -9,13 +9,11 @@ height: 5vh;
 width: 95%;
 margin: 2.5%;
 `
-
-
 function BotaoCard(props) {
 
     return (
         <div>
-            <StyledButton onClick={"Adicionar ao carrinho"} >Adicionar ao carrinho</StyledButton>
+            <StyledButton onClick={'123'} >Adicionar ao carrinho</StyledButton>
 
         </div>
     )

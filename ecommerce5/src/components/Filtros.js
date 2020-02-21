@@ -18,7 +18,7 @@ class Filtro extends React.Component {
     }
 
     handleOnChangeFiltroValorMinimo = (event) => {
-        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.props.dados  : this.state.dadosFiltrados
+        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.props.dados : this.state.dadosFiltrados
         const dadosFiltrados = dados.filter((dado) => {
             return dado.value >= event.target.value
         })
@@ -60,16 +60,26 @@ class Filtro extends React.Component {
         })
     }
 
+    salvarFiltroPreco = (event) =>{
+        const valorFiltrar = event.target.value
+        this.props.ordenarCards(valorFiltrar)
+    }
+
     render() {
         return (
             <FiltrosPlaceholder>
                 <h3>Filtros</h3>
                 <span>Valor Minimo:</span>
-                <input onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number"/> <br/>
+                <input onChange={this.handleOnChangeFiltroValorMinimo} value={this.state.valorMinimo} type="number" /> <br />
                 <span>Valor Maximo:</span>
-                <input onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} type="number"/> <br/>
+                <input onChange={this.handleOnChangeFiltroValorMaximo} value={this.state.valorMaximo} type="number" /> <br />
                 <span>Buscar Produto:</span>
-                <input  onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} type="text"/> <br/>
+                <input onChange={this.handleOnChangeFiltroNomeProduto} value={this.state.nomeProduto} type="text" /> <br />
+                <span>Preço</span>
+                <select onChange = {this.salvarFiltroPreco}>
+                    <option value ="0">Crescente</option>
+                    <option value = "1">Decrescente</option>
+                </select>
             </FiltrosPlaceholder>
         )
     }
