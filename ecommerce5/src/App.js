@@ -17,56 +17,56 @@ class App extends React.Component {
     this.state = {
       cards: [{
         id: 1,
-        name: "Produto 1",
-        value: 10.00,
+        name: "O grande Tuor Pelos planetas",
+        value: 3599.00,
         imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa1.jpg"
       },
       {
         id: 2,
-        name: "Produto 12",
-        value: 5.0,
-        imageUrl: "https://picsum.photos/200/200"
+        name: "Viagem a marte",
+        value: 2349.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa5.jpg"
       },
       {
         id: 3,
         name: "Produto 123",
-        value: 6.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 2149.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa2.jpg"
       },
       {
         id: 4,
         name: "Produto 13",
-        value: 8.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 1849.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa3.jpg"
       },
       {
         id: 5,
-        name: "Produto 16",
-        value: 7.0,
-        imageUrl: "https://picsum.photos/200/200"
+        name: "O grande Jupter",
+        value: 1499.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa4.jpg"
       },
       {
         id: 6,
         name: "Produto 18",
-        value: 2.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 1199.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa6.jpg"
       }, {
         id: 7,
         name: "Produto 199",
-        value: 1.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 999.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa7.jpg"
       },
       {
         id: 8,
         name: "Produto 1222",
-        value: 3.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 979.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa7.jpg"
       },
       {
         id: 9,
         name: "Produto 134",
-        value: 4.0,
-        imageUrl: "https://picsum.photos/200/200"
+        value: 849.00,
+        imageUrl: "https://img.vixdata.io/pd/webp-large/pt/sites/default/files/bbr/nasa9.jpg"
       }],
       cardsFiltrados: []
     }
@@ -82,12 +82,20 @@ class App extends React.Component {
   componentDidMount() {
     this.modificarDadosFiltrados(this.state.cards)
   }
+
+  ordenarCards = (valorFiltrar) =>{
+    const novoValorFiltrar = valorFiltrar
+    this.setState({
+      ordemPreco:  novoValorFiltrar
+    })
+    console.log(this.state.ordemPreco)
+  }
   
   render() {
     return (
       <MainDiv>
-        <Filtro dados = { this.state.cards } modificarDadosFiltrados = {this.modificarDadosFiltrados}  />
-        <Home dados={ this.state.cardsFiltrados } />
+        <Filtro dados = { this.state.cards } modificarDadosFiltrados = {this.modificarDadosFiltrados} ordenarCards = {this.ordenarCards} />
+        <Home dados={ this.state.cardsFiltrados } ordemPreco ={this.state.ordemPreco}/>
       </MainDiv>
     )
   }

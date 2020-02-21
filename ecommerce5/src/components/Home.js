@@ -15,9 +15,11 @@ margin-left: 5px;
 function Home(props) {
     return (
         <ImagesGridPlaceholder>
-            { props.dados.map((dado) => {
+            {props.ordemPreco  == '1' ? props.dados.map((dado) => {
                 return <Cards imagem={dado.imageUrl} titulo={dado.name} value={dado.value}/>
-            }) }
+            }) : props.dados.map((dado) => {
+                return <Cards key={dado.id} imagem={dado.imageUrl} titulo={dado.name} value={dado.value}/>
+            }).reverse()}
         </ImagesGridPlaceholder>
 )
     
