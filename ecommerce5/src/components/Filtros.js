@@ -18,47 +18,127 @@ class Filtro extends React.Component {
     }
 
     handleOnChangeFiltroValorMinimo = (event) => {
-        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados  
-        const dadosFiltrados = dados.filter((dado) => {
-            return dado.value >= event.target.value
-        })
-
-        this.props.modificarDadosFiltrados(dadosFiltrados)
-
         this.setState({
-            valorMinimo: event.target.value,
-            dadosFiltrados
+            valorMinimo: event.target.value
         })
+
+        if (event.target.value !== '') {
+            const dados = (this.state.valorMaximo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados  
+            
+            const dadosFiltrados = this.aplicarFiltroPorValorMinimo(dados, event.target.value)
+
+            console.log(dados, event.target.value)
+
+            this.props.modificarDadosFiltrados(dadosFiltrados)
+    
+            this.setState({
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+            })
+        } else {
+            let dados = this.props.dados
+
+            if (this.state.valorMaximo !== '') {
+                dados = this.aplicarFiltroPorValorMaximo(dados)
+            }
+
+            if (this.state.nomeProduto !== '') {
+                dados = this.aplicarFiltroPorNome(dados)
+            }
+
+            this.props.modificarDadosFiltrados(dados)
+
+            this.setState({
+                dadosFiltrados: dados
+            })
+        }
     }
 
     handleOnChangeFiltroValorMaximo = (event) => {
-        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados
-        const dadosFiltrados = dados.filter((dado) => {
-            return dado.value <= event.target.value
-        })
-
-        this.props.modificarDadosFiltrados(dadosFiltrados)
-
         this.setState({
-            valorMaximo: event.target.value,
-            dadosFiltrados
+            valorMaximo: event.target.value
         })
-    }
 
+        if (event.target.value !== '') {
+            const dados = (this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados
+
+            const dadosFiltrados = this.aplicarFiltroPorValorMaximo(dados, event.target.value)
+    
+            this.props.modificarDadosFiltrados(dadosFiltrados)
+    
+            this.setState({
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+            })
+        } else {
+            let dados = this.props.dados
+
+            if (this.state.valorMinimo !== '') {
+                dados = this.aplicarFiltroPorValorMinimo(dados)
+            }
+
+            if (this.state.nomeProduto !== '') {
+                dados = this.aplicarFiltroPorNome(dados)
+            }
+
+            this.props.modificarDadosFiltrados(dados)
+
+            this.setState({
+                dadosFiltrados: dados
+            })
+        }
+    }
 
     handleOnChangeFiltroNomeProduto = (event) => {
-        const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '' || this.state.nomeProduto !== '') ? this.state.dadosFiltrados : this.props.dados
-        const dadosFiltrados = dados.filter((dado) => {
-            return dado.name.toLowerCase().includes(event.target.value.toLowerCase())
+        this.setState({
+            nomeProduto: event.target.value
         })
 
-        this.props.modificarDadosFiltrados(dadosFiltrados)
+        if (event.target.value !== '') {
+            const dados = (this.state.valorMaximo !== '' || this.state.valorMinimo !== '') ? this.state.dadosFiltrados : this.props.dados
+            
+            const dadosFiltrados = this.aplicarFiltroPorNome(dados, event.target.value)
+    
+            this.props.modificarDadosFiltrados(dadosFiltrados)
+    
+            this.setState({
+                dadosFiltrados: dadosFiltrados.length > 0 ? dadosFiltrados : dados 
+            })
+        } else {
+            let dados = this.props.dados
 
-        this.setState({
-            nomeProduto: event.target.value,
-            dadosFiltrados
+            if (this.state.valorMinimo !== '') {
+                dados = this.aplicarFiltroPorValorMinimo(dados)
+            }
+
+            if (this.state.valorMaximo !== '') {
+                dados = this.aplicarFiltroPorValorMaximo(dados)
+            }
+
+            this.props.modificarDadosFiltrados(dados)
+
+            this.setState({
+                dadosFiltrados: dados
+            })
+        }
+    }
+
+    aplicarFiltroPorValorMinimo = (dados, filtro = this.state.valorMinimo) => {
+        return dados.filter((dado) => {
+            return dado.value >= filtro
         })
     }
+
+    aplicarFiltroPorValorMaximo = (dados, filtro = this.state.valorMaximo) => {
+        return dados.filter((dado) => {
+            return dado.value <= filtro
+        })
+    }
+
+    aplicarFiltroPorNome = (dados, filtro = this.state.nomeProduto) => {
+        return dados.filter((dado) => {
+            return dado.name.toLowerCase().includes(filtro.toLowerCase())
+        })
+    }
+
 
     render() {
         return (

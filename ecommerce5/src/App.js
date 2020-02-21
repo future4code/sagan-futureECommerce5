@@ -78,12 +78,16 @@ class App extends React.Component {
       cardsFiltrados: novosDadosFiltrados
     })
   }
+
+  componentDidMount() {
+    this.modificarDadosFiltrados(this.state.cards)
+  }
   
   render() {
     return (
       <MainDiv>
         <Filtro dados = { this.state.cards } modificarDadosFiltrados = {this.modificarDadosFiltrados}  />
-        <Home dados={ this.state.cardsFiltrados.length > 0 ? this.state.cardsFiltrados : this.state.cards} />
+        <Home dados={ this.state.cardsFiltrados } />
       </MainDiv>
     )
   }
