@@ -10,15 +10,13 @@ margin-top: 35px;
 margin-left: 5px;
 `
 
-//remover margin top depois
-
 function Home(props) {
     return (
         <ImagesGridPlaceholder>
             {props.ordemPreco  == '1' ? props.dados.map((dado) => {
-                return <Cards imagem={dado.imageUrl} titulo={dado.name} value={dado.value}/>
+                return <Cards imagem={dado.imageUrl} titulo={dado.name} value={dado.value} id={dado.id}/>
             }) : props.dados.map((dado) => {
-                return <Cards key={dado.id} imagem={dado.imageUrl} titulo={dado.name} value={dado.value}/>
+                return <Cards key={dado.id} imagem={dado.imageUrl} titulo={dado.name} value={dado.value} addProduto={props.addProduto} id={dado.id}/>
             }).reverse()}
         </ImagesGridPlaceholder>
 )

@@ -29,7 +29,7 @@ return (
         <ImagemCard src={props.imagem} alt =" Imagem do card" />
         <StyledSpan>{props.titulo}</StyledSpan>
         <StyledSpan>R${props.value}</StyledSpan>
-        <BotaoCard/>
+        <BotaoCard addProduto={props.addProduto} id={props.id}/>
     </Card>
 )
 }
